@@ -38,9 +38,13 @@ a { color: inherit; text-decoration: none; }
 
 img { max-width: 100%; display: block; }
 
-section { padding: 6rem 3rem; max-width: 1280px; margin: 0 auto; }
+section { padding: 4.5rem 3rem; max-width: 1280px; margin: 0 auto; }
 
-.section-header { text-align: center; max-width: 640px; margin: 0 auto 3.5rem; }
+@media (max-width: 768px) {
+  section { padding: 2.75rem 1.5rem; }
+}
+
+.section-header { text-align: center; max-width: 640px; margin: 0 auto 2.5rem; }
 .section-label {
   display: inline-block;
   color: var(--accent-1-light);
@@ -91,8 +95,15 @@ a[href^="tel:"] { color: var(--white); -webkit-text-fill-color: var(--white); }
   .nav-links { display: none; }
   .mobile-phone-btn {
     display: flex; align-items: center; justify-content: center;
-    min-width: 44px; height: 44px;
-    background: var(--accent-1); border-radius: 50%; color: var(--white);
+    gap: 0.4rem;
+    height: 40px;
+    padding: 0 1rem;
+    background: var(--accent-1);
+    border-radius: 20px;
+    color: var(--white);
+    font-size: 0.85rem;
+    font-weight: 600;
+    white-space: nowrap;
   }
 }
 
@@ -102,7 +113,7 @@ a[href^="tel:"] { color: var(--white); -webkit-text-fill-color: var(--white); }
   grid-template-columns: 1fr 1fr;
   gap: 3rem;
   align-items: center;
-  padding: 4rem 3rem 5rem;
+  padding: 3.5rem 3rem 3.5rem;
   max-width: 1280px;
   margin: 0 auto;
 }
@@ -159,13 +170,21 @@ a[href^="tel:"] { color: var(--white); -webkit-text-fill-color: var(--white); }
 }
 
 @media (max-width: 900px) {
-  .hero { grid-template-columns: 1fr; padding-top: 3rem; }
+  .hero { grid-template-columns: 1fr; padding-top: 2.5rem; padding-bottom: 2.5rem; }
   .hero h1 { font-size: 2.2rem; }
 }
 
+@media (max-width: 768px) {
+  .section-header { margin-bottom: 1.8rem; }
+  .section-header h2 { font-size: 1.9rem; }
+  .service-hero { padding: 3.5rem 1.5rem 2rem; }
+}
+
 @media (max-width: 480px) {
-  .hero-stats-row { flex-direction: column; gap: 0.4rem; }
-  .hero-stat-card { padding: 0.5rem 0.8rem; }
+  .hero-stats-row { gap: 0.35rem; bottom: 10px; left: 10px; right: 10px; }
+  .hero-stat-card { padding: 0.45rem 0.3rem; }
+  .hero-stat-card strong { font-size: 0.95rem; }
+  .hero-stat-card span { font-size: 0.58rem; }
 }
 
 /* ============ SERVICES ============ */
@@ -235,6 +254,7 @@ a[href^="tel:"] { color: var(--white); -webkit-text-fill-color: var(--white); }
   background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 1.8rem;
 }
 .testimonial-card p { font-style: italic; margin-bottom: 1.2rem; color: var(--text-light); }
+.testimonial-stars { color: var(--accent-1-light); font-size: 1rem; letter-spacing: 0.15em; margin-bottom: 0.8rem; }
 .testimonial-card strong { color: var(--accent-1-light); font-size: 0.85rem; font-style: normal; }
 
 @media (max-width: 900px) { .testimonials-grid { grid-template-columns: 1fr; } }
@@ -278,7 +298,7 @@ footer { background: var(--bg-card); border-top: 1px solid var(--border); paddin
 
 /* ============ SERVICE PAGES ============ */
 .service-hero {
-  padding: 7rem 3rem 4rem;
+  padding: 5.5rem 3rem 3rem;
   max-width: 900px;
   margin: 0 auto;
   text-align: center;

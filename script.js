@@ -8,6 +8,8 @@ const observer = new IntersectionObserver((entries) => {
 document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
 /* ===== Before/After carousel ===== */
+// Steps by however many slides are visible at once, so on desktop
+// (2 visible) the before/after pair always moves and lands together.
 let currentSlide = 0;
 const track = document.getElementById('carouselTrack');
 
@@ -18,11 +20,16 @@ if (track) {
     return window.innerWidth <= 768 ? 1 : 2;
   }
 
+  function maxSlide() {
+    return totalSlides - getSlidesPerView();
+  }
+
   function buildDots() {
     const dotsWrap = document.getElementById('carouselDots');
     dotsWrap.innerHTML = '';
-    const maxSlide = totalSlides - getSlidesPerView();
-    for (let i = 0; i <= maxSlide; i++) {
+    const step = getSlidesPerView();
+    const max = maxSlide();
+    for (let i = 0; i <= max; i += step) {
       const dot = document.createElement('span');
       if (i === currentSlide) dot.classList.add('active');
       dot.addEventListener('click', () => { currentSlide = i; render(); });
@@ -35,19 +42,20 @@ if (track) {
     const slideWidth = 100 / slidesPerView;
     track.style.transform = `translateX(-${currentSlide * slideWidth}%)`;
     document.querySelectorAll('.carousel-dots span').forEach((dot, i) => {
-      dot.classList.toggle('active', i === currentSlide);
+      dot.classList.toggle('active', currentSlide === i * getSlidesPerView());
     });
   }
 
   window.moveSlide = function(direction) {
-    const maxSlide = totalSlides - getSlidesPerView();
-    currentSlide = Math.max(0, Math.min(currentSlide + direction, maxSlide));
+    const step = getSlidesPerView();
+    const max = maxSlide();
+    currentSlide = Math.max(0, Math.min(currentSlide + direction * step, max));
     render();
   };
 
   window.addEventListener('resize', () => {
-    const maxSlide = totalSlides - getSlidesPerView();
-    if (currentSlide > maxSlide) currentSlide = maxSlide;
+    const max = maxSlide();
+    if (currentSlide > max) currentSlide = max;
     buildDots();
     render();
   });
